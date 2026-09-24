@@ -1,0 +1,13 @@
+{
+  "name": "conde-play",
+  "version": "1.0.0",
+  "description": "O site do CondePlay: fileiras, herois, ficha, perfis e player HLS. Sem framework e sem etapa de build.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test testes/*.test.js",
+    "servir": "npx serve -l 5210 -n ."
+  },
+  "license": "MIT"
+}
