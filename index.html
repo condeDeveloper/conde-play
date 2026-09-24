@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CondePlay</title>
+<meta name="description" content="Catálogo de streaming completo — perfis, controle parental, minha lista, continuar assistindo e player HLS, tudo escrito do zero.">
+<meta name="theme-color" content="#161B22">
+<link rel="stylesheet" href="css/estilo.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23A52A45'/%3E%3Cpath d='M12 9l12 7-12 7z' fill='%23F0F6FC'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ---------------------------------------------------- seleção de perfil -->
+<section id="tela-perfis" class="tela-perfis" hidden>
+  <h1 class="marca marca-grande">Conde<span>Play</span></h1>
+  <p class="quem">Quem está assistindo?</p>
+  <ul id="perfis" class="perfis"></ul>
+  <p class="aviso" id="aviso-fonte"></p>
+</section>
+
+<!-- --------------------------------------------------------------- o app -->
+<div id="app" hidden>
+
+  <header class="topo" id="topo">
+    <a class="marca" href="#" id="ir-inicio">Conde<span>Play</span></a>
+
+    <nav class="menu">
+      <button type="button" data-secao="inicio" class="ativo">Início</button>
+      <button type="button" data-secao="series">Séries</button>
+      <button type="button" data-secao="filmes">Filmes</button>
+      <button type="button" data-secao="lista">Minha lista</button>
+    </nav>
+
+    <div class="direita">
+      <label class="busca">
+        <span class="oculto">Buscar</span>
+        <input type="search" id="busca" placeholder="Buscar títulos, elenco…" autocomplete="off">
+      </label>
+      <button type="button" id="trocar-perfil" class="avatar-botao" title="Trocar de perfil"></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="heroi" id="heroi" hidden>
+      <div class="heroi-arte" id="heroi-arte"></div>
+      <div class="heroi-texto">
+        <p class="selo-tipo" id="heroi-tipo"></p>
+        <h2 id="heroi-nome"></h2>
+        <p class="meta" id="heroi-meta"></p>
+        <p class="sinopse" id="heroi-sinopse"></p>
+        <div class="acoes">
+          <button type="button" class="principal" id="heroi-assistir">▶ Assistir</button>
+          <button type="button" class="secundaria" id="heroi-detalhes">Mais informações</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="fileiras" class="fileiras"></div>
+
+    <section id="resultados" class="grade-secao" hidden>
+      <h2 id="resultados-titulo"></h2>
+      <div class="grade" id="resultados-grade"></div>
+      <p class="vazio" id="resultados-vazio" hidden>Nada encontrado.</p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>
+      CondePlay — catálogo, player HLS, recomendações e telemetria, tudo escrito do zero.
+      <a href="https://github.com/condeDeveloper/conde-play">código no GitHub</a>
+    </p>
+    <p class="fino" id="credito-midia"></p>
+  </footer>
+</div>
+
+<!-- ---------------------------------------------------------------- ficha -->
+<dialog id="ficha" class="ficha">
+  <button type="button" class="fechar" id="ficha-fechar" aria-label="Fechar">×</button>
+  <div class="ficha-arte" id="ficha-arte"></div>
+  <div class="ficha-corpo">
+    <h3 id="ficha-nome"></h3>
+    <p class="meta" id="ficha-meta"></p>
+    <p class="sinopse" id="ficha-sinopse"></p>
+    <div class="acoes">
+      <button type="button" class="principal" id="ficha-assistir">▶ Assistir</button>
+      <button type="button" class="secundaria" id="ficha-lista"></button>
+    </div>
+    <dl class="creditos" id="ficha-creditos"></dl>
+    <div id="ficha-temporadas" class="temporadas"></div>
+  </div>
+</dialog>
+
+<!-- --------------------------------------------------------------- player -->
+<div id="reprodutor" class="reprodutor" hidden>
+  <video id="video" playsinline></video>
+
+  <div class="camada" id="camada">
+    <div class="camada-topo">
+      <button type="button" id="voltar" class="icone" aria-label="Voltar">←</button>
+      <div class="camada-titulo">
+        <strong id="tocando-nome"></strong>
+        <span id="tocando-episodio"></span>
+      </div>
+      <span class="medidor-banda" id="medidor-banda"></span>
+    </div>
+
+    <div class="camada-baixo">
+      <input type="range" id="linha" class="linha" min="0" max="1000" value="0" step="1" aria-label="Posição">
+      <div class="controles">
+        <button type="button" id="tocar" class="icone" aria-label="Tocar ou pausar">▶</button>
+        <button type="button" id="voltar-10" class="icone" aria-label="Voltar 10 segundos">⟲</button>
+        <button type="button" id="avancar-10" class="icone" aria-label="Avançar 10 segundos">⟳</button>
+        <span class="tempo" id="tempo">0:00 / 0:00</span>
+        <span class="espaco"></span>
+        <button type="button" id="pular-abertura" class="pular" hidden>Pular abertura</button>
+        <select id="qualidade" class="qualidade" aria-label="Qualidade"></select>
+        <button type="button" id="tela-cheia" class="icone" aria-label="Tela cheia">⛶</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="carregando" id="carregando" hidden>carregando…</p>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
